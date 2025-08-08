@@ -1,96 +1,80 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# Fishy-Sea-Fables🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: fathima shifa
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: fathima shifa - unity women's college
+
+
 
 ### Project Description
-[2-3 lines about what your project does]
+“This app helps users discover fun facts about fish while enjoying a relaxing ocean-themed interface.”
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+“People have way too much fun scrolling through fish facts but no way to see them swim gracefully on screen.”
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+“We created a virtual aquarium with animated fish that swim around while you learn cool trivia — because why not?”
+
+
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+-  JavaScript, HTML, CSS
+-  React.js
+- Lottie.js – for fish, bubbles, and water-drinking animations
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+Howler.js – for background music with on/off controls
+
+Chart.js – for showing funny ocean and fish stats
+
+
+- Lovable – for AI-assisted website building
+
+Figma – for UI/UX design
+
+GitHub – for version control and backups
+
+
+
+
 
 ### Implementation
 For Software:
 # Installation
-[commands]
+npm 
+node js
 
 # Run
-[commands]
+node install
+npm install
+npm run dev
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+screenshot 1-https://drive.google.com/file/d/11FL6vVUl9UJnSg9X6zvWvNL8llCLfbn6/view?usp=drive_link
+screenshot 2- https://drive.google.com/file/d/15eav9h2M7urLsZffgq-3PZ3Rlz8Pg457/view?usp=drive_link
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+screenshot 3- https://drive.google.com/file/d/19h4aJh1BR1yOsUztdeXePTC5oXtfZH9Z/view?usp=drive_link
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
 
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://drive.google.com/file/d/1fiwax9IYjTgTRJGWqWFWaa0lvfA72hGY/view?usp=drive_link
+when we click on start button it will enter to a page and  we acn see an free animation if you don't want to see the animation there is an option for skip . then we have page 3  for choosing different types of ocean after the confirmation of ocean type page 4 will enter ,we have options for choosing different type of fishes then confirm it.start exploring,there 4 option for selecting ,choose any one then it will display its result' 
 
-# Additional Demos
-[Add any extra demo materials/links]
 
-## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
