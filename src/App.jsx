@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import CameraCapture from './CameraCapture.jsx'
 import DetectionScreen from './DetectionScreen.jsx'
+import Header from './Header.jsx'
 import './App.css'
 
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
@@ -58,8 +59,21 @@ function App() {
     setToast(null)
   }
 
+  const handleHome = () => {
+    setIsOpen(false)
+    setCameraOpen(false)
+    handleReset()
+  }
+
+  const handleCount = () => {
+    handleHome()
+    setIsOpen(true)
+  }
+
   return (
-    <main className="screen">
+    <>
+      <Header onHome={handleHome} onCount={handleCount} />
+      <main className="screen">
       {view === 'start' && (
         <div className="card">
           <span className="coconut" role="img" aria-label="coconut">
@@ -153,7 +167,8 @@ function App() {
           {toast}
         </div>
       )}
-    </main>
+      </main>
+    </>
   )
 }
 
