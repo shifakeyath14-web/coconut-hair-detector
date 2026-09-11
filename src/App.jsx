@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import CameraCapture from './CameraCapture.jsx'
 import './App.css'
 
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
@@ -6,8 +7,10 @@ const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [toast, setToast] = useState(null)
+  const [cameraOpen, setCameraOpen] = useState(false)
+  const [capturedImage, setCapturedImage] = useState(null)
   const galleryInputRef = useRef(null)
-  const cameraInputRef = useRef(null)
+  const toastTimerRef = useRef(null)
 
   useEffect(() => {
     if (!isOpen) return
@@ -19,14 +22,25 @@ function App() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [isOpen])
 
+  const showToast = (message) => {
+    window.clearTimeout(toastTimerRef.current)
+    setToast(message)
+    toastTimerRef.current = window.setTimeout(() => setToast(null), 3200)
+  }
+
   const handleImageSelected = (event) => {
     const file = event.target.files?.[0]
     event.target.value = ''
     if (!file) return
 
     setIsOpen(false)
-    setToast(`${file.name} added — analysis comes next!`)
-    window.setTimeout(() => setToast(null), 3200)
+    showToast(`${file.name} added — analysis comes next!`)
+  }
+
+  const handleUsePhoto = (imageSrc) => {
+    setCapturedImage(imageSrc)
+    setCameraOpen(false)
+    showToast('Photo captured — analysis comes next!')
   }
 
   return (
@@ -80,7 +94,7 @@ function App() {
             <button
               type="button"
               className="option-card"
-              onClick={() => cameraInputRef.current?.click()}
+              onClick={() => setCameraOpen(true)}
             >
               <span className="option-icon" aria-hidden="true">
                 📷
@@ -93,6 +107,14 @@ function App() {
           </div>
         )}
 
+        {capturedImage && (
+          <img
+            className="result-preview"
+            src={capturedImage}
+            alt="Captured coconut"
+          />
+        )}
+
         <input
           ref={galleryInputRef}
           type="file"
@@ -100,15 +122,14 @@ function App() {
           hidden
           onChange={handleImageSelected}
         />
-        <input
-          ref={cameraInputRef}
-          type="file"
-          accept="image/*"
-          capture="environment"
-          hidden
-          onChange={handleImageSelected}
-        />
       </div>
+
+      {cameraOpen && (
+        <CameraCapture
+          onClose={() => setCameraOpen(false)}
+          onCapture={handleUsePhoto}
+        />
+      )}
 
       {toast && (
         <div className="toast" role="status">

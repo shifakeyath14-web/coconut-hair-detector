@@ -176,6 +176,17 @@ h1 {
   font-size: 13px;
 }
 
+.result-preview {
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(120, 90, 40, 0.14);
+  border: 1px solid #efe8d8;
+  animation: rise 0.3s ease-out both;
+}
+
 .toast {
   position: fixed;
   bottom: 28px;
