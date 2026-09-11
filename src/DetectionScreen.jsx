@@ -3,13 +3,13 @@ import { detectFibres } from './fibreDetection.js'
 import './DetectionScreen.css'
 
 const STATUS_MESSAGES = [
-  'Looking for coconut fibres...',
-  'Counting tiny hairs...',
-  'Inspecting the coconut...',
-  'Almost done...',
+  'Scanning the coconut surface...',
+  'Examining the fibres...',
+  'Counting visible hairs...',
+  'Almost finished...',
 ]
 
-const MIN_ANALYSIS_MS = 2800
+const MIN_ANALYSIS_MS = 3400
 
 function taglineFor(count) {
   if (count < 100) return 'Getting a little fuzzy! 🥥'
@@ -21,16 +21,18 @@ function DetectionScreen({ imageSrc, onReset, onToast }) {
   const [phase, setPhase] = useState('analyzing')
   const [messageIndex, setMessageIndex] = useState(0)
   const [result, setResult] = useState(null)
+  const [imageAspect, setImageAspect] = useState(null)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
     let cancelled = false
+
     const startedAt = Date.now()
     const messageTimer = window.setInterval(() => {
       setMessageIndex((index) => (index + 1) % STATUS_MESSAGES.length)
     }, 800)
 
     detectFibres(imageSrc)
-      .catch(() => ({ count: 127, confidence: 73, markers: [] }))
       .then((detection) => {
         const elapsed = Date.now() - startedAt
         const remaining = Math.max(0, MIN_ANALYSIS_MS - elapsed)
@@ -40,16 +42,24 @@ function DetectionScreen({ imageSrc, onReset, onToast }) {
           setPhase('done')
         }, remaining)
       })
+      .catch(() => {
+        const elapsed = Date.now() - startedAt
+        const remaining = Math.max(0, MIN_ANALYSIS_MS - elapsed)
+        window.setTimeout(() => {
+          if (cancelled) return
+          setPhase('error')
+        }, remaining)
+      })
 
     return () => {
       cancelled = true
       window.clearInterval(messageTimer)
     }
-  }, [imageSrc])
+  }, [imageSrc, retryCount])
 
   const shareResult = async () => {
     if (!result) return
-    const text = `My coconut has ${result.count} fibres! ${taglineFor(result.count)}`
+    const text = `My coconut has ${result.fibreCount} fibres! ${taglineFor(result.fibreCount)}`
 
     if (navigator.share) {
       try {
@@ -73,32 +83,35 @@ function DetectionScreen({ imageSrc, onReset, onToast }) {
     onToast("Web Share isn't supported in this browser.")
   }
 
+  const aspectRatio = result?.width
+    ? `${result.width} / ${result.height}`
+    : imageAspect ?? '4 / 3'
+
   return (
     <main className="screen">
       <div className="detect-card">
-        <div className="detect-image">
-          <img src={imageSrc} alt="Coconut" />
-          {phase === 'analyzing' && <div className="scan-line" aria-hidden="true" />}
-          {result && (
-            <div className="markers" aria-hidden="true">
-              {result.markers.map((marker, index) => (
-                <span
-                  key={`${index}-${marker.x}-${marker.y}`}
-                  className="marker"
-                  style={{
-                    left: `${marker.x * 100}%`,
-                    top: `${marker.y * 100}%`,
-                    animationDelay: `${Math.min(index * 0.02, 0.5)}s`,
-                  }}
-                />
-              ))}
+        <div className="detect-image" style={{ aspectRatio }}>
+          <img
+            src={imageSrc}
+            alt="Coconut"
+            onLoad={(event) =>
+              setImageAspect(
+                event.currentTarget.naturalWidth /
+                  event.currentTarget.naturalHeight,
+              )
+            }
+          />
+          {phase === 'analyzing' && (
+            <div className="scan-layer" aria-hidden="true">
+              <div className="scan-dim" />
+              <div className="scan-beam" />
             </div>
           )}
         </div>
 
         {phase === 'analyzing' && (
           <>
-            <h1 className="detect-title">Analyzing your coconut 🥥</h1>
+            <h1 className="detect-title">Analyzing your coconut... 🥥</h1>
             <p className="analyze-status">
               <span className="analyze-spinner" aria-hidden="true" />
               {STATUS_MESSAGES[messageIndex]}
@@ -111,19 +124,23 @@ function DetectionScreen({ imageSrc, onReset, onToast }) {
             <div className="result-card">
               <p className="result-eyebrow">YOUR COCONUT HAS</p>
               <div className="fibre-count">
-                <span className="count-number">{result.count}</span>
+                <span className="count-number">{result.fibreCount}</span>
                 <span className="fibre-label">FIBRES</span>
               </div>
-              <p className="result-tagline">{taglineFor(result.count)}</p>
-              <div className="confidence">
-                <div className="confidence-row">
-                  <span>AI Confidence</span>
-                  <span>{result.confidence}%</span>
+              <p className="result-tagline">
+                {taglineFor(result.fibreCount)}
+              </p>
+              {result.confidence != null && (
+                <div className="confidence">
+                  <div className="confidence-row">
+                    <span>AI Confidence</span>
+                    <span>{Math.round(result.confidence * 100)}%</span>
+                  </div>
+                  <div className="confidence-bar" aria-hidden="true">
+                    <span style={{ width: `${result.confidence * 100}%` }} />
+                  </div>
                 </div>
-                <div className="confidence-bar" aria-hidden="true">
-                  <span style={{ width: `${result.confidence}%` }} />
-                </div>
-              </div>
+              )}
             </div>
 
             <div className="detect-actions">
@@ -135,6 +152,34 @@ function DetectionScreen({ imageSrc, onReset, onToast }) {
               </button>
             </div>
           </>
+        )}
+
+        {phase === 'error' && (
+          <div className="error-card">
+            <p className="error-heading">
+              We couldn&apos;t analyze this coconut right now 🥥
+            </p>
+            <p className="error-sub">
+              Something went wrong while reaching the AI service.
+            </p>
+            <div className="detect-actions">
+              <button
+                type="button"
+                className="recount-btn"
+                onClick={() => {
+                  setMessageIndex(0)
+                  setPhase('analyzing')
+                  setResult(null)
+                  setRetryCount((n) => n + 1)
+                }}
+              >
+                Try Again
+              </button>
+              <button type="button" className="share-btn" onClick={onReset}>
+                Go Back
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </main>

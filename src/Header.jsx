@@ -1,14 +1,23 @@
 import { useState } from 'react'
 import './Header.css'
 
-const NAV_LINKS = ['Home', 'How It Works', 'About']
+const NAV_LINKS = [
+  { label: 'Home', target: 'home' },
+  { label: 'How It Works', target: 'how' },
+  { label: 'About', target: 'about' },
+]
 
-function Header({ onHome, onCount }) {
+function Header({ onHome, onHow, onAbout, onCount }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const navigate = {
+    home: onHome,
+    how: onHow,
+    about: onAbout,
+  }
 
-  const goHome = () => {
+  const go = (target) => {
     setMenuOpen(false)
-    onHome()
+    navigate[target]()
   }
 
   const startCount = () => {
@@ -22,7 +31,7 @@ function Header({ onHome, onCount }) {
         <button
           type="button"
           className="logo"
-          onClick={goHome}
+          onClick={() => go('home')}
           aria-label="Coconut Hair Counter home"
         >
           <span className="logo-icon" aria-hidden="true">
@@ -32,9 +41,14 @@ function Header({ onHome, onCount }) {
         </button>
 
         <nav className="header-nav" aria-label="Primary">
-          {NAV_LINKS.map((label) => (
-            <button type="button" key={label} className="nav-link" onClick={goHome}>
-              {label}
+          {NAV_LINKS.map((link) => (
+            <button
+              type="button"
+              key={link.label}
+              className="nav-link"
+              onClick={() => go(link.target)}
+            >
+              {link.label}
             </button>
           ))}
           <button type="button" className="header-cta" onClick={startCount}>
@@ -57,14 +71,14 @@ function Header({ onHome, onCount }) {
 
       {menuOpen && (
         <nav className="mobile-menu" aria-label="Mobile navigation">
-          {NAV_LINKS.map((label) => (
+          {NAV_LINKS.map((link) => (
             <button
               type="button"
-              key={label}
+              key={link.label}
               className="mobile-link"
-              onClick={goHome}
+              onClick={() => go(link.target)}
             >
-              {label}
+              {link.label}
             </button>
           ))}
           <button type="button" className="mobile-cta" onClick={startCount}>

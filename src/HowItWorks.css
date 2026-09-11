@@ -1,0 +1,147 @@
+.page {
+  min-height: calc(100svh - var(--header-height, 68px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.page-head h1 {
+  font-size: 34px;
+  font-weight: 800;
+  color: #2b2a26;
+  margin: 0;
+}
+
+.page-head p {
+  color: #7a756a;
+  font-size: 16px;
+  margin: 10px 0 0;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 880px;
+  margin-top: 36px;
+}
+
+.step-card {
+  background: #fffdf7;
+  border: 1px solid #efe8d8;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(120, 90, 40, 0.08);
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.15s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-3px);
+}
+
+.step-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #22a556;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(34, 165, 86, 0.3);
+}
+
+.step-icon {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.step-card h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2b2a26;
+  margin: 0;
+}
+
+.step-card p {
+  margin: 0;
+  color: #7a756a;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.fun-note {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 32px;
+  background: #ffffff;
+  border: 1px dashed #d9cdb0;
+  border-radius: 16px;
+  padding: 14px 28px;
+}
+
+.fun-note p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.fun-note p:first-child {
+  color: #b0875a;
+}
+
+.fun-note p:last-child {
+  color: #22a556;
+}
+
+.page-cta {
+  margin-top: 28px;
+  background: #22a556;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(34, 165, 86, 0.32);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.page-cta:hover {
+  background: #1e9550;
+}
+
+.page-cta:active {
+  transform: scale(0.97);
+}
+
+.page-cta:focus-visible {
+  outline: 3px solid #7cd29e;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .page-head h1 {
+    font-size: 26px;
+  }
+}

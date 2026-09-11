@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
+import About from './About.jsx'
 import CameraCapture from './CameraCapture.jsx'
 import DetectionScreen from './DetectionScreen.jsx'
 import Header from './Header.jsx'
+import HowItWorks from './HowItWorks.jsx'
 import './App.css'
 
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
 function App() {
-  const [view, setView] = useState('start')
+  const [view, setView] = useState('home')
   const [isOpen, setIsOpen] = useState(false)
   const [toast, setToast] = useState(null)
   const [cameraOpen, setCameraOpen] = useState(false)
@@ -53,16 +55,26 @@ function App() {
     startDetection(imageSrc)
   }
 
-  const handleReset = () => {
-    setView('start')
+  const handleHome = () => {
+    setView('home')
+    setIsOpen(false)
+    setCameraOpen(false)
     setDetectionImage(null)
     setToast(null)
   }
 
-  const handleHome = () => {
+  const handleHow = () => {
+    setView('how')
     setIsOpen(false)
     setCameraOpen(false)
-    handleReset()
+    setToast(null)
+  }
+
+  const handleAbout = () => {
+    setView('about')
+    setIsOpen(false)
+    setCameraOpen(false)
+    setToast(null)
   }
 
   const handleCount = () => {
@@ -72,101 +84,112 @@ function App() {
 
   return (
     <>
-      <Header onHome={handleHome} onCount={handleCount} />
+      <Header
+        onHome={handleHome}
+        onHow={handleHow}
+        onAbout={handleAbout}
+        onCount={handleCount}
+      />
       <main className="screen">
-      {view === 'start' && (
-        <div className="card">
-          <span className="coconut" role="img" aria-label="coconut">
-            🥥
-          </span>
-          <h1>Coconut Hair Counter</h1>
-          <p className="subtitle">Let&apos;s find out how hairy your coconut is.</p>
+        {view === 'home' && (
+          <div className="card">
+            <span className="coconut" role="img" aria-label="coconut">
+              🥥
+            </span>
+            <h1>Coconut Hair Counter</h1>
+            <p className="subtitle">
+              Let&apos;s find out how hairy your coconut is.
+            </p>
 
-          {!isOpen && (
-            <button
-              type="button"
-              className="primary-btn"
-              onClick={() => setIsOpen(true)}
-            >
-              <span>＋</span>
-              Add Coconut Image
-            </button>
-          )}
+            {!isOpen && (
+              <button
+                type="button"
+                className="primary-btn"
+                onClick={() => setIsOpen(true)}
+              >
+                <span>＋</span>
+                Add Coconut Image
+              </button>
+            )}
 
-          {isOpen && (
-            <div className="panel" role="dialog" aria-modal="true">
-              <div className="panel-header">
-                <p className="panel-title">Add your coconut</p>
+            {isOpen && (
+              <div className="panel" role="dialog" aria-modal="true">
+                <div className="panel-header">
+                  <p className="panel-title">Add your coconut</p>
+                  <button
+                    type="button"
+                    className="close-btn"
+                    aria-label="Close"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    ✕
+                  </button>
+                </div>
+
                 <button
                   type="button"
-                  className="close-btn"
-                  aria-label="Close"
-                  onClick={() => setIsOpen(false)}
+                  className="option-card"
+                  onClick={() => galleryInputRef.current?.click()}
                 >
-                  ✕
+                  <span className="option-icon" aria-hidden="true">
+                    🖼️
+                  </span>
+                  <span className="option-copy">
+                    <strong>Choose from Gallery</strong>
+                    <small>JPG, PNG or WEBP</small>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  className="option-card"
+                  onClick={() => setCameraOpen(true)}
+                >
+                  <span className="option-icon" aria-hidden="true">
+                    📷
+                  </span>
+                  <span className="option-copy">
+                    <strong>Capture Image</strong>
+                    <small>Snap a fresh coconut</small>
+                  </span>
                 </button>
               </div>
+            )}
 
-              <button
-                type="button"
-                className="option-card"
-                onClick={() => galleryInputRef.current?.click()}
-              >
-                <span className="option-icon" aria-hidden="true">
-                  🖼️
-                </span>
-                <span className="option-copy">
-                  <strong>Choose from Gallery</strong>
-                  <small>JPG, PNG or WEBP</small>
-                </span>
-              </button>
+            <input
+              ref={galleryInputRef}
+              type="file"
+              accept={IMAGE_TYPES.join(',')}
+              hidden
+              onChange={handleGallerySelected}
+            />
+          </div>
+        )}
 
-              <button
-                type="button"
-                className="option-card"
-                onClick={() => setCameraOpen(true)}
-              >
-                <span className="option-icon" aria-hidden="true">
-                  📷
-                </span>
-                <span className="option-copy">
-                  <strong>Capture Image</strong>
-                  <small>Snap a fresh coconut</small>
-                </span>
-              </button>
-            </div>
-          )}
+        {view === 'how' && <HowItWorks onCount={handleCount} />}
 
-          <input
-            ref={galleryInputRef}
-            type="file"
-            accept={IMAGE_TYPES.join(',')}
-            hidden
-            onChange={handleGallerySelected}
+        {view === 'about' && <About onCount={handleCount} />}
+
+        {view === 'detect' && detectionImage && (
+          <DetectionScreen
+            imageSrc={detectionImage}
+            onReset={handleHome}
+            onToast={showToast}
           />
-        </div>
-      )}
+        )}
 
-      {view === 'detect' && detectionImage && (
-        <DetectionScreen
-          imageSrc={detectionImage}
-          onReset={handleReset}
-          onToast={showToast}
-        />
-      )}
+        {cameraOpen && (
+          <CameraCapture
+            onClose={() => setCameraOpen(false)}
+            onCapture={handleUsePhoto}
+          />
+        )}
 
-      {cameraOpen && (
-        <CameraCapture
-          onClose={() => setCameraOpen(false)}
-          onCapture={handleUsePhoto}
-        />
-      )}
-
-      {toast && (
-        <div className="toast" role="status">
-          {toast}
-        </div>
-      )}
+        {toast && (
+          <div className="toast" role="status">
+            {toast}
+          </div>
+        )}
       </main>
     </>
   )

@@ -27,41 +27,66 @@
   display: block;
 }
 
-.scan-line {
+.scan-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scan-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 42, 38, 0.07);
+}
+
+.scan-beam {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  height: 16%;
+  height: 20%;
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(34, 165, 86, 0.22) 38%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(34, 165, 86, 0.22) 62%,
+    rgba(34, 190, 170, 0.05) 30%,
+    rgba(34, 190, 170, 0.02) 70%,
     transparent
   );
-  animation: scanSweep 1.6s linear infinite;
-  pointer-events: none;
+  animation: scanMove 3.2s ease-in-out infinite;
 }
 
-.markers {
+.scan-beam::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  pointer-events: none;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(45, 218, 190, 0.95),
+    transparent
+  );
+  box-shadow: 0 0 14px 3px rgba(34, 199, 164, 0.5);
 }
 
-.marker {
+.scan-beam::after {
+  content: '';
   position: absolute;
-  width: 7px;
-  height: 7px;
-  margin: -3.5px 0 0 -3.5px;
-  border-radius: 50%;
-  background: #22a556;
-  box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.85),
-    0 0 6px rgba(34, 165, 86, 0.8);
-  animation: markerPop 0.35s ease-out both;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 14%;
+  transform: translateY(-50%);
+  background: radial-gradient(
+    ellipse 70% 100% at 50% 50%,
+    rgba(34, 199, 164, 0.16),
+    transparent 70%
+  );
 }
 
 .detect-title {
@@ -168,6 +193,28 @@
   animation: barGrow 0.6s ease-out both;
 }
 
+.error-card {
+  margin-top: 18px;
+  background: #ffffff;
+  border: 1px solid #efe8d8;
+  border-radius: 20px;
+  padding: 26px 24px;
+  text-align: center;
+}
+
+.error-heading {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2b2a26;
+}
+
+.error-sub {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #8a857a;
+}
+
 .detect-actions {
   display: flex;
   gap: 12px;
@@ -218,23 +265,12 @@
   background: #f4f0e3;
 }
 
-@keyframes scanSweep {
+@keyframes scanMove {
   0% {
-    transform: translateY(-10%);
+    transform: translateY(-100%);
   }
   100% {
-    transform: translateY(660%);
-  }
-}
-
-@keyframes markerPop {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateY(500%);
   }
 }
 
