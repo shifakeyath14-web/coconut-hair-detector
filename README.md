@@ -6,35 +6,54 @@
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: [Techvibe]
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: [Fathima shifa] - [KAHM Unity womens College Manjeri]
+- Member 1: [Fathima shifa] - [KAHM Unity womens College Manjeri]
+- Member 2: [Arsha thesni] - [KAHM Unity Womens College Manjeri]
 
 ### Project Description
-[2-3 lines about what your project does]
+**Coconut Hair Counter** is a completely unnecessary AI-powered website that analyzes a photo of a coconut and counts the number of visible "hairs" on it. 🥥
+
+Because apparently, counting coconut hairs manually was the problem the world was waiting to solve.
 
 ### The Problem (that doesn't exist)
 [What ridiculous problem are you solving?]
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Simply upload or capture an image of a coconut.
+
+Our system analyzes the image and:
+
+* Detects the coconut 🥥
+* Scans its surface
+* Identifies visible hair-like regions
+* Counts them
+* Displays the final **Coconut Hair Count**
+* Shows a scanning effect while processing
+
+Now you never have to wonder about coconut hair count again.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+#### For Software:
+
+* **HTML**
+* **CSS**
+* **JavaScript**
+* **React**
+* **Tailwind CSS**
+* **AI / Image Analysis API**
+* **Vite**
+* **Git & GitHub**
+* **VS Code**
 
 For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+* Laptop/Desktop
+* Camera (optional, for capturing coconut images)
 
 ### Implementation
 For Software:
