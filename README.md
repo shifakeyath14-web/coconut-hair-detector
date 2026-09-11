@@ -58,10 +58,13 @@ For Hardware:
 ### Implementation
 For Software:
 # Installation
-[commands]
+bash
+git clone git@github.com:shifakeyath14-web/coconut-hair-detector.git
+
+
 
 # Run
-[commands]
+npm run dev
 
 ### Project Documentation
 For Software:
@@ -90,15 +93,6 @@ Upload / Capture Coconut Image
               ↓
         Display Result 🥥
 
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
 
 ### Project Demo
 # Video
@@ -111,8 +105,3 @@ The video demonstrates the complete process of uploading a coconut image, the sc
                    AI/image analysis integration, coconut detection and hair-counting logic.
 - [Arsha thesni]:  Testing, UI improvements, documentation and project presentation.
 
----
-Made with ❤️ at TinkerHub Useless Projects 
-
-![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
-![Static Badge](https://img.shields.io/badge/UselessProjects--26-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)
