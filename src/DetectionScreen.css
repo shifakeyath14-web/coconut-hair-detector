@@ -1,0 +1,279 @@
+.detect-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fffdf7;
+  border: 1px solid #efe8d8;
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgba(120, 90, 40, 0.08);
+  padding: 20px;
+  text-align: center;
+  animation: detectRise 0.4s ease-out both;
+}
+
+.detect-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #e8e2d2;
+  box-shadow: inset 0 0 0 1px #efe8d8;
+}
+
+.detect-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 16%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(34, 165, 86, 0.22) 38%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(34, 165, 86, 0.22) 62%,
+    transparent
+  );
+  animation: scanSweep 1.6s linear infinite;
+  pointer-events: none;
+}
+
+.markers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: #22a556;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.85),
+    0 0 6px rgba(34, 165, 86, 0.8);
+  animation: markerPop 0.35s ease-out both;
+}
+
+.detect-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #2b2a26;
+  margin: 20px 0 4px;
+}
+
+.analyze-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 22px;
+  color: #7a756a;
+  font-size: 15px;
+  margin: 4px 0 0;
+}
+
+.analyze-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid #e4dcc8;
+  border-top-color: #22a556;
+  animation: detectSpin 0.7s linear infinite;
+}
+
+.result-card {
+  margin-top: 18px;
+  background: #ffffff;
+  border: 1px solid #efe8d8;
+  border-radius: 20px;
+  padding: 22px 20px;
+  box-shadow: 0 10px 26px rgba(120, 90, 40, 0.1);
+}
+
+.result-eyebrow {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #9a9487;
+}
+
+.fibre-count {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0 0;
+}
+
+.count-number {
+  font-size: 78px;
+  line-height: 0.95;
+  font-weight: 900;
+  color: #22a556;
+  text-shadow: 0 4px 14px rgba(34, 165, 86, 0.25);
+}
+
+.fibre-label {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2b2a26;
+  letter-spacing: 0.04em;
+}
+
+.result-tagline {
+  margin: 12px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #7a756a;
+}
+
+.confidence {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.confidence-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6f6a5f;
+}
+
+.confidence-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #f0ebdf;
+  overflow: hidden;
+}
+
+.confidence-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22a556, #7cd29e);
+  animation: barGrow 0.6s ease-out both;
+}
+
+.detect-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.detect-actions button {
+  flex: 1;
+  border-radius: 999px;
+  padding: 14px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.detect-actions button:active {
+  transform: scale(0.97);
+}
+
+.detect-actions button:focus-visible {
+  outline: 3px solid #7cd29e;
+  outline-offset: 2px;
+}
+
+.recount-btn {
+  background: #22a556;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 8px 18px rgba(34, 165, 86, 0.32);
+}
+
+.recount-btn:hover {
+  background: #1e9550;
+}
+
+.share-btn {
+  background: #ffffff;
+  color: #2b2a26;
+  border: 2px solid #e6dfcf;
+}
+
+.share-btn:hover {
+  background: #f4f0e3;
+}
+
+@keyframes scanSweep {
+  0% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(660%);
+  }
+}
+
+@keyframes markerPop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes detectSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes detectRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .detect-card {
+    padding: 16px;
+  }
+
+  .count-number {
+    font-size: 64px;
+  }
+
+  .detect-actions {
+    flex-direction: column;
+  }
+}
