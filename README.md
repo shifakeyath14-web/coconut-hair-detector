@@ -67,18 +67,28 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+!https://drive.google.com/drive/folders/12TKnDDKtTINJn9FVC13Q2pEA4JfsXdNF?usp=sharing
+The home screen where users can upload or select a coconut image for analysis.*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+!https://drive.google.com/drive/folders/12TKnDDKtTINJn9FVC13Q2pEA4JfsXdNF?usp=sharing
+The coconut scanning interface showing the AI scanning effect while analyzing the image.*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+!https://drive.google.com/drive/folders/12TKnDDKtTINJn9FVC13Q2pEA4JfsXdNF?usp=sharing
+*The final result displaying the estimated number of visible coconut hairs.*
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+!*Workflow showing the process from image upload to coconut detection, AI analysis, hair counting, and displaying the final result.*
+Upload / Capture Coconut Image
+              ↓
+        Image Processing
+              ↓
+       Coconut Detection
+              ↓
+       Hair Analysis
+              ↓
+      Hair Count Estimation
+              ↓
+        Display Result 🥥
 
 For Hardware:
 
@@ -89,28 +99,17 @@ For Hardware:
 ![Schematic](Add your schematic diagram here)
 *Add caption explaining the schematic*
 
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://drive.google.com/drive/folders/1M-APg53hS09hmiINzTj4VKoC2pjDcimJ?usp=sharing
+The video demonstrates the complete process of uploading a coconut image, the scanning animation, AI analysis, and the final coconut hair count
 
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- [shifa Fathima]: Frontend development, UI design, image upload functionality and overall project integration.
+                   AI/image analysis integration, coconut detection and hair-counting logic.
+- [Arsha thesni]:  Testing, UI improvements, documentation and project presentation.
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
